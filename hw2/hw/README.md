@@ -98,7 +98,6 @@ pytest -vv --showlocals --strict ./hw2/test_homework_2_1.py
 ```
 
 Если получаете ошибку на подобии `No module named 'shop_api'`
-
 Понадобится еще такая команда, после которой можно запускать тесты:
 
 ```sh
