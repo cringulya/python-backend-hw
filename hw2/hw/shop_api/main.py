@@ -37,7 +37,9 @@ class Cart:
             self.items[id] = 1
 
     def quantity(self):
-        return sum([0 if items[id].deleted else q for id, q in self.items.items()])
+        return sum(
+            [0 if items[id].deleted else q for id, q in self.items.items()]
+        )
 
     def price(self):
         sum = 0.0
@@ -86,7 +88,8 @@ def get_cart_by_id(id: int):
             return cart.serialize()
 
     return JSONResponse(
-        status_code=HTTPStatus.UNPROCESSABLE_ENTITY, content={"message": "no such id"}
+        status_code=HTTPStatus.UNPROCESSABLE_ENTITY,
+        content={"message": "no such id"},
     )
 
 
@@ -127,7 +130,9 @@ def post_cart(cart_id: int, item_id: int):
 def add_item(item: Item):
     id = len(items)
     items[id] = item
-    return JSONResponse(status_code=HTTPStatus.CREATED, content=items[id].serialize(id))
+    return JSONResponse(
+        status_code=HTTPStatus.CREATED, content=items[id].serialize(id)
+    )
 
 
 @app.get("/item/{id}")
@@ -177,7 +182,8 @@ def patch_item(id: int, updates: ItemUpdate):
         )
     if items[id].deleted:
         return JSONResponse(
-            status_code=HTTPStatus.NOT_MODIFIED, content={"message": "not modified"}
+            status_code=HTTPStatus.NOT_MODIFIED,
+            content={"message": "not modified"},
         )
 
     if updates.name is not None:
