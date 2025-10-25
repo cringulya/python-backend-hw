@@ -5,6 +5,7 @@ from typing import Any, Optional
 from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict
+from prometheus_fastapi_instrumentator import Instrumentator
 
 
 @dataclass
@@ -68,6 +69,7 @@ class Cart:
 carts: list[Cart] = []
 
 app = FastAPI(title="Shop API")
+Instrumentator().instrument(app).expose(app)
 
 
 @app.post("/cart")
