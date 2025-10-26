@@ -5,12 +5,9 @@ from sqlalchemy.orm import sessionmaker
 from shop_api.main import app, Base, get_db
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Configure connection args based on database type
 connect_args = {}
-if DATABASE_URL.startswith("sqlite"):
-    connect_args = {"check_same_thread": False}
 
 engine = create_engine(DATABASE_URL, connect_args=connect_args)
 TestingSessionLocal = sessionmaker(
@@ -20,7 +17,6 @@ TestingSessionLocal = sessionmaker(
 
 @pytest.fixture(scope="function")
 def db():
-    # Clean and recreate database before each test
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     db = TestingSessionLocal()

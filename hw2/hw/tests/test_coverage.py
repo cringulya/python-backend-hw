@@ -1,21 +1,11 @@
-"""
-Additional tests to achieve 95% coverage
-"""
 import pytest
 from http import HTTPStatus
 
 
-def test_sqlite_connection_args(client):
-    """Test that SQLite connection args are properly set (line 27)"""
-    # This test ensures the SQLite connection args code path is covered
-    # The actual coverage happens during module import when DATABASE_URL starts with sqlite
-    pass
 
 
 def test_startup_event(client):
     """Test startup event handler (lines 147-148)"""
-    # The startup event is triggered when the app starts
-    # This is covered by the app initialization in conftest.py
     pass
 
 
@@ -37,7 +27,7 @@ def test_post_cart_add_item_nonexistent_item(client):
     """Test adding non-existent item to cart (line 223)"""
     cart_response = client.post("/cart")
     cart_id = cart_response.json()["id"]
-    
+
     response = client.post(f"/cart/{cart_id}/add/99999")
     assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
     assert response.json()["message"] == "no such item_id"
