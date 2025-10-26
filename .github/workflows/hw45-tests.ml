@@ -1,4 +1,4 @@
-name: CI
+name: HW-4-5
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
         run: |
           while ! pg_isready -h localhost -p 5432 -U shop_user; do
             echo "Waiting for PostgreSQL..."
-            sleep 5
+            sleep 2
           done
           echo "PostgreSQL is ready!"
 
