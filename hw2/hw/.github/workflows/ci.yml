@@ -42,7 +42,7 @@ jobs:
         run: |
           while ! pg_isready -h localhost -p 5432 -U shop_user; do
             echo "Waiting for PostgreSQL..."
-            sleep 2
+            sleep 5
           done
           echo "PostgreSQL is ready!"
 
