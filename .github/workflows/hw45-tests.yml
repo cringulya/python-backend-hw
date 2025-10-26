@@ -34,7 +34,9 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
+        working-directory: hw2/hw
         run: |
+          cd 
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
@@ -47,12 +49,14 @@ jobs:
           echo "PostgreSQL is ready!"
 
       - name: Run tests with coverage
+        working-directory: hw2/hw
         env:
           DATABASE_URL: postgresql://shop_user:shop_password@localhost:5432/shop_db
         run: |
           python -m pytest --cov=shop_api --cov-report=xml --cov-report=term-missing --cov-fail-under=95
 
       - name: Display coverage
+        working-directory: hw2/hw
         run: |
           echo "Coverage report:"
           cat coverage.xml
