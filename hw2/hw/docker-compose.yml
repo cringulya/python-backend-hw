@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: ./Dockerfile
       target: local
+    environment:
+      DATABASE_URL: postgresql://shop_user:shop_password@postgres:5432/shop_db
     restart: always
     ports:
       - 8080:8080
@@ -28,3 +30,15 @@ services:
     ports:
       - 9090:9090
     restart: always
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: shop_user
+      POSTGRES_PASSWORD: shop_password
+      POSTGRES_DB: shop_db
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data

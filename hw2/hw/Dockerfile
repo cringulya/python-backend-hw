@@ -7,7 +7,7 @@ ARG PYTHONFAULTHANDLER=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=500
 
-RUN apt-get update && apt-get install -y gcc
+RUN apt-get update && apt-get install -y gcc postgres-client
 RUN python -m pip install --upgrade pip
 
 WORKDIR app
@@ -15,6 +15,7 @@ COPY . ./
 
 ENV VIRTUAL_ENV=app/.venv \
     PATH=app/.venv/bin:$PATH
+
 
 RUN pip install -r requirements.txt
 
